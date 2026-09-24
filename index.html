@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neev Saraiya · WRO Follower Robot</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f0f4fa;
+      font-family: 'Inter', sans-serif;
+      color: #1a2b3d;
+      line-height: 1.55;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1.5rem 1rem;
+    }
+
+    /* main card */
+    .card {
+      background: #ffffff;
+      border-radius: 2.4rem;
+      padding: 2.5rem 2.8rem;
+      max-width: 1100px;
+      width: 100%;
+      box-shadow: 0 25px 50px -18px rgba(0, 30, 60, 0.25),
+                  0 0 0 1px rgba(255, 255, 255, 0.6) inset;
+      border: 1px solid #e2ebf5;
+    }
+
+    /* header */
+    .header-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+    }
+
+    .name-badge {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .avatar {
+      background: linear-gradient(135deg, #0d2d4b, #1e4b78);
+      width: 3.8rem;
+      height: 3.8rem;
+      border-radius: 1.6rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.8rem;
+      font-weight: 700;
+      box-shadow: 0 12px 18px -8px rgba(0, 30, 60, 0.35);
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      letter-spacing: 0.02em;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      color: #0a1e30;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .search-hint {
+      background: #f2f8ff;
+      border-radius: 40px;
+      padding: 0.5rem 1.3rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+      border: 1px solid #cfdef0;
+      color: #1d3b5c;
+    }
+
+    .search-hint i {
+      color: #2b5d8a;
+      font-size: 0.9rem;
+    }
+
+    /* CONNECT BUTTON */
+    .connect-btn {
+      background: #1e3a5a;
+      color: white;
+      border: none;
+      padding: 0.7rem 1.6rem;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.15s, box-shadow 0.2s, transform 0.1s;
+      box-shadow: 0 8px 16px -8px #0a1e30;
+      border: 1px solid #45688b;
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+    }
+
+    .connect-btn i {
+      font-size: 0.95rem;
+    }
+
+    .connect-btn:hover {
+      background: #28445e;
+      box-shadow: 0 10px 20px -8px #071826;
+    }
+
+    .connect-btn:active {
+      transform: scale(0.97);
+    }
+
+    /* tagline */
+    .tagline {
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: #1e3a5a;
+      margin-bottom: 2rem;
+      background: #e9f0fa;
+      padding: 0.8rem 1.6rem;
+      border-radius: 3rem;
+      display: inline-block;
+      border: 1px solid #bdd1e9;
+      box-shadow: 0 4px 10px -4px rgba(0, 0, 0, 0.04);
+    }
+
+    .tagline i {
+      margin-right: 0.5rem;
+      color: #1a4b7a;
+    }
+
+    /* divider */
+    .divider {
+      height: 2px;
+      background: linear-gradient(90deg, #b6cbe0, #dbe6f2, #b6cbe0);
+      border-radius: 10px;
+      margin: 1.8rem 0;
+      opacity: 0.6;
+    }
+
+    /* ===== SECTION STYLES (RaghavHub-inspired) ===== */
+    .section {
+      margin-bottom: 2.2rem;
+    }
+
+    .section-heading {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #0a1e30;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      margin-bottom: 1.2rem;
+      letter-spacing: -0.01em;
+      border-left: 5px solid #1a4b7a;
+      padding-left: 1.1rem;
+    }
+
+    .section-heading i {
+      color: #1a4b7a;
+      font-size: 1.4rem;
+      width: 1.8rem;
+    }
+
+    .subheading {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #1e3a5a;
+      margin: 1.5rem 0 0.8rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+    }
+
+    .subheading i {
+      color: #2b5d8a;
+      font-size: 1rem;
+    }
+
+    /* info cards grid */
+    .card-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+
+    .info-card {
+      background: #f6faff;
+      border-radius: 1.2rem;
+      padding: 1rem 1.4rem;
+      border: 1px solid #d0e0f0;
+      flex: 1 1 240px;
+      box-shadow: 0 4px 8px -4px rgba(0, 30, 60, 0.06);
+    }
+
+    .info-card .label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-weight: 600;
+      color: #4f7092;
+      margin-bottom: 0.25rem;
+    }
+
+    .info-card .value {
+      font-size: 1rem;
+      font-weight: 500;
+      color: #0b2a44;
+    }
+
+    .info-card .value i {
+      color: #1a4b7a;
+      margin-right: 0.35rem;
+      width: 1.1rem;
+      font-size: 0.9rem;
+    }
+
+    /* partner row */
+    .partner-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1.5rem;
+      background: #edf4fc;
+      padding: 1.2rem 1.8rem;
+      border-radius: 1.6rem;
+      margin: 1.2rem 0 1rem 0;
+      border: 1px solid #c2d6ec;
+    }
+
+    .partner-info {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex: 1 1 220px;
+    }
+
+    .partner-avatar {
+      background: #1e3e60;
+      color: white;
+      width: 3.2rem;
+      height: 3.2rem;
+      border-radius: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+
+    .partner-text h4 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #0b2a44;
+    }
+
+    .partner-text p {
+      font-size: 0.88rem;
+      color: #32567a;
+    }
+
+    .hub-link {
+      background: #1a2b3d;
+      color: white;
+      border-radius: 3rem;
+      padding: 0.6rem 1.5rem;
+      font-weight: 500;
+      font-size: 0.88rem;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: background 0.15s, box-shadow 0.2s;
+      border: 1px solid #45688b;
+      box-shadow: 0 6px 14px -6px #0e1e2e;
+      white-space: nowrap;
+    }
+
+    .hub-link i {
+      font-size: 0.85rem;
+    }
+
+    .hub-link:hover {
+      background: #28445e;
+      box-shadow: 0 8px 16px -6px #091826;
+    }
+
+    /* bullet list */
+    .bullet-list {
+      list-style: none;
+      margin: 0.8rem 0 0.5rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .bullet-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.9rem;
+      background: #f6faff;
+      padding: 0.9rem 1.3rem;
+      border-radius: 1.2rem;
+      border: 1px solid #d0e0f0;
+      font-size: 0.95rem;
+      color: #183b5c;
+    }
+
+    .bullet-list li i {
+      color: #1a4b7a;
+      font-size: 1.1rem;
+      width: 1.5rem;
+      margin-top: 0.1rem;
+    }
+
+    .bullet-list li strong {
+      font-weight: 700;
+      color: #0b2a44;
+    }
+
+    .badge-score {
+      background: #1e3a5a;
+      color: white;
+      border-radius: 40px;
+      padding: 0.12rem 0.85rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      margin-left: 0.5rem;
+      display: inline-block;
+      letter-spacing: 0.02em;
+    }
+
+    /* table */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0 0.5rem 0;
+      font-size: 0.9rem;
+      border-radius: 1.2rem;
+      overflow: hidden;
+      box-shadow: 0 4px 12px -6px rgba(0, 20, 40, 0.1);
+    }
+
+    .data-table th {
+      background: #1e3a5a;
+      color: white;
+      font-weight: 600;
+      text-align: left;
+      padding: 0.85rem 1.2rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .data-table td {
+      padding: 0.8rem 1.2rem;
+      border-bottom: 1px solid #d8e5f2;
+      background: #ffffff;
+      color: #0d2d4b;
+      vertical-align: top;
+    }
+
+    .data-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .data-table tr:hover td {
+      background: #f4faff;
+    }
+
+    .data-table td:first-child {
+      font-weight: 600;
+      color: #1a3e62;
+      white-space: nowrap;
+    }
+
+    .val-badge {
+      background: #e9f2fc;
+      border-radius: 30px;
+      padding: 0.18rem 0.9rem;
+      font-weight: 500;
+      display: inline-block;
+      font-size: 0.82rem;
+      border: 1px solid #bed6ee;
+    }
+
+    /* ===== QUIZ STYLES ===== */
+    .quiz-container {
+      background: #f6faff;
+      border-radius: 1.8rem;
+      padding: 2rem 2.2rem;
+      border: 1px solid #c2d6ec;
+      margin-top: 1rem;
+      box-shadow: 0 8px 20px -10px rgba(0, 30, 60, 0.12);
+    }
+
+    .quiz-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.8rem;
+    }
+
+    .quiz-header h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #0a1e30;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .quiz-header h3 i {
+      color: #1a4b7a;
+      font-size: 1.4rem;
+    }
+
+    .quiz-score-badge {
+      background: #1e3a5a;
+      color: white;
+      border-radius: 40px;
+      padding: 0.4rem 1.3rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    .quiz-question {
+      margin-bottom: 1.8rem;
+      background: #ffffff;
+      padding: 1.3rem 1.5rem;
+      border-radius: 1.4rem;
+      border: 1px solid #d8e5f2;
+      box-shadow: 0 2px 6px -2px rgba(0, 20, 40, 0.04);
+    }
+
+    .quiz-question p {
+      font-weight: 600;
+      color: #0b2a44;
+      margin-bottom: 0.9rem;
+      font-size: 1rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+    }
+
+    .quiz-question p .q-num {
+      background: #1e3a5a;
+      color: white;
+      border-radius: 50%;
+      width: 1.6rem;
+      height: 1.6rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    .quiz-options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      margin-left: 2.2rem;
+    }
+
+    .quiz-option {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      padding: 0.65rem 1rem;
+      border-radius: 0.9rem;
+      border: 1.5px solid #d0e0f0;
+      cursor: pointer;
+      transition: all 0.15s;
+      background: #fafdff;
+      font-size: 0.93rem;
+      color: #1e3a5a;
+    }
+
+    .quiz-option:hover {
+      background: #edf6ff;
+      border-color: #a8c4e0;
+    }
+
+    .quiz-option.selected {
+      background: #e3efff;
+      border-color: #2b5d8a;
+      box-shadow: 0 0 0 1px #2b5d8a inset;
+    }
+
+    .quiz-option.correct {
+      background: #e2f3e9;
+      border-color: #1b7a3f;
+      box-shadow: 0 0 0 1px #1b7a3f inset;
+    }
+
+    .quiz-option.incorrect {
+      background: #fdeaea;
+      border-color: #b33a3a;
+      box-shadow: 0 0 0 1px #b33a3a inset;
+    }
+
+    .quiz-option input[type="radio"] {
+      accent-color: #1a4b7a;
+      width: 1rem;
+      height: 1rem;
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+
+    .quiz-option .option-text {
+      flex: 1;
+    }
+
+    .quiz-option .feedback-icon {
+      font-size: 1rem;
+      width: 1.2rem;
+      text-align: center;
+    }
+
+    .quiz-option .feedback-icon.correct-icon {
+      color: #1b7a3f;
+    }
+
+    .quiz-option .feedback-icon.incorrect-icon {
+      color: #b33a3a;
+    }
+
+    .quiz-btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+      margin-top: 1.5rem;
+    }
+
+    .quiz-submit-btn {
+      background: #1e3a5a;
+      color: white;
+      border: none;
+      padding: 0.85rem 2.2rem;
+      border-radius: 3rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      cursor: pointer;
+      transition: background 0.15s, box-shadow 0.2s, transform 0.1s;
+      box-shadow: 0 8px 16px -8px #0a1e30;
+      border: 1px solid #45688b;
+    }
+
+    .quiz-submit-btn i {
+      font-size: 1rem;
+    }
+
+    .quiz-submit-btn:hover {
+      background: #28445e;
+      box-shadow: 0 10px 20px -8px #071826;
+    }
+
+    .quiz-submit-btn:active {
+      transform: scale(0.97);
+    }
+
+    .quiz-reset-btn {
+      background: #ffffff;
+      color: #1e3a5a;
+      border: 1.5px solid #b6cbe0;
+      padding: 0.85rem 2rem;
+      border-radius: 3rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s;
+    }
+
+    .quiz-reset-btn i {
+      font-size: 1rem;
+    }
+
+    .quiz-reset-btn:hover {
+      background: #f2f8ff;
+      border-color: #8aafd0;
+    }
+
+    .quiz-result {
+      margin-top: 1.5rem;
+      padding: 1.2rem 1.8rem;
+      border-radius: 1.4rem;
+      font-weight: 600;
+      font-size: 1.1rem;
+      display: none;
+      align-items: center;
+      gap: 0.8rem;
+      border: 2px solid transparent;
+    }
+
+    .quiz-result.show {
+      display: flex;
+    }
+
+    .quiz-result.perfect {
+      background: #e2f3e9;
+      color: #0b5e2e;
+      border-color: #a8d5b5;
+    }
+
+    .quiz-result.good {
+      background: #e9f2fc;
+      color: #0b2a44;
+      border-color: #a8c4e0;
+    }
+
+    .quiz-result.average {
+      background: #fef7e6;
+      color: #7a5a00;
+      border-color: #e6d5a0;
+    }
+
+    .quiz-result.poor {
+      background: #fdeaea;
+      color: #8b2a2a;
+      border-color: #e6b8b8;
+    }
+
+    .quiz-result i {
+      font-size: 1.6rem;
+    }
+
+    .quiz-result .score-text {
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+
+    .quiz-result .score-detail {
+      font-size: 0.9rem;
+      font-weight: 400;
+      opacity: 0.8;
+      margin-left: 0.3rem;
+    }
+
+    /* footer */
+    .footer-note {
+      margin-top: 2.5rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #6988a8;
+      border-top: 1px solid #cdddec;
+      padding-top: 1.5rem;
+      letter-spacing: 0.01em;
+    }
+
+    .footer-note i {
+      margin: 0 0.2rem;
+    }
+
+    /* responsiveness */
+    @media (max-width: 750px) {
+      .card {
+        padding: 1.8rem 1.4rem;
+        border-radius: 2rem;
+      }
+      h1 {
+        font-size: 1.8rem;
+      }
+      .header-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+      .name-badge {
+        width: 100%;
+      }
+      .header-actions {
+        width: 100%;
+        justify-content: flex-start;
+      }
+      .avatar {
+        width: 3.2rem;
+        height: 3.2rem;
+        font-size: 1.5rem;
+      }
+      .tagline {
+        font-size: 1rem;
+        padding: 0.7rem 1.2rem;
+      }
+      .partner-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .data-table th,
+      .data-table td {
+        padding: 0.65rem 0.8rem;
+        font-size: 0.8rem;
+      }
+      .data-table td:first-child {
+        white-space: normal;
+      }
+      .quiz-container {
+        padding: 1.4rem 1.2rem;
+      }
+      .quiz-options {
+        margin-left: 0;
+      }
+      .quiz-question {
+        padding: 1rem 1rem;
+      }
+      .quiz-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .card {
+        padding: 1.2rem 0.9rem;
+      }
+      h1 {
+        font-size: 1.5rem;
+      }
+      .section-heading {
+        font-size: 1.1rem;
+      }
+      .bullet-list li {
+        padding: 0.7rem 0.9rem;
+        font-size: 0.85rem;
+      }
+      .data-table th,
+      .data-table td {
+        font-size: 0.72rem;
+        padding: 0.5rem 0.5rem;
+      }
+      .quiz-submit-btn,
+      .quiz-reset-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 0.75rem 1.2rem;
+      }
+      .quiz-btn-row {
+        flex-direction: column;
+      }
+      .connect-btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <!-- HEADER with name + connect button -->
+    <div class="header-row">
+      <div class="name-badge">
+        <div class="avatar">NS</div>
+        <h1>Neev Saraiya</h1>
+      </div>
+      <div class="header-actions">
+        <div class="search-hint">
+          <i class="fas fa-search"></i>
+          <span>search: <strong>“Neev Saraiya WRO”</strong></span>
+        </div>
+        <!-- CONNECT BUTTON (mailto) -->
+        <a href="mailto:neevsaraiya2015@gmail.com" class="connect-btn">
+          <i class="fas fa-paper-plane"></i> Connect
+        </a>
+      </div>
+    </div>
+
+    <!-- tagline -->
+    <div class="tagline">
+      <i class="fas fa-robot"></i> 4WD Vision‑Based Follower Robot · Obstacle Avoidance · IMU Stabilization
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ===== TECHNICAL REPORT (RaghavHub layout) ===== -->
+    <div class="section">
+      <div class="section-heading">
+        <i class="fas fa-file-alt"></i> Technical Report
+      </div>
+
+      <!-- 1. Introduction -->
+      <div class="subheading">
+        <i class="fas fa-circle-info"></i> 1. Introduction
+      </div>
+      <p style="color: #254b6e; margin-bottom: 0.8rem; font-size: 0.95rem;">
+        This project implements a 4‑wheel‑drive autonomous follower robot using a combination of HuskyLens vision‑based target tracking, Cytron MD10‑POT motor drivers, four Pepperl+Fuchs ML100 industrial optical sensors, MPU‑6050 inertial measurement unit, four‑channel relay interface, and an Arduino‑compatible controller with hardware UART and I²C interfaces.
+      </p>
+      <p style="color: #254b6e; margin-bottom: 0.8rem; font-size: 0.95rem;">
+        The software is structured around a Finite State Machine (FSM) that manages normal target tracking, target‑loss recovery, obstacle avoidance, reverse movement and emergency shutdown. The left‑side motors (front‑left and rear‑left) are controlled together, while the front‑right and rear‑right motors form the right drive pair.
+      </p>
+
+      <!-- 2. Project Objective -->
+      <div class="subheading">
+        <i class="fas fa-bullseye"></i> 2. Project Objective
+      </div>
+      <ul class="bullet-list">
+        <li><i class="fas fa-check-circle"></i> Following a visually identified target using HuskyLens.</li>
+        <li><i class="fas fa-check-circle"></i> Maintaining an appropriate distance from the target.</li>
+        <li><i class="fas fa-check-circle"></i> Correcting direction according to the target's horizontal image position.</li>
+        <li><i class="fas fa-check-circle"></i> Detecting obstacles from four directions.</li>
+        <li><i class="fas fa-check-circle"></i> Automatically selecting an available direction for obstacle avoidance.</li>
+        <li><i class="fas fa-check-circle"></i> Reversing when required.</li>
+        <li><i class="fas fa-check-circle"></i> Searching for the target when visual tracking is lost.</li>
+        <li><i class="fas fa-check-circle"></i> Applying inertial correction to compensate for yaw drift.</li>
+        <li><i class="fas fa-check-circle"></i> Gradually changing motor speed to avoid abrupt acceleration/deceleration.</li>
+        <li><i class="fas fa-check-circle"></i> Entering an emergency‑stop condition when blocked or unsafe.</li>
+      </ul>
+
+      <!-- 3. System Overview -->
+      <div class="subheading">
+        <i class="fas fa-microchip"></i> 3. System Overview
+      </div>
+      <div class="card-grid">
+        <div class="info-card"><div class="label">Controller</div><div class="value"><i class="fas fa-microchip"></i> Arduino‑compatible</div></div>
+        <div class="info-card"><div class="label">Vision</div><div class="value"><i class="fas fa-eye"></i> HuskyLens (UART, 9600 baud)</div></div>
+        <div class="info-card"><div class="label">Motor Driver</div><div class="value"><i class="fas fa-bolt"></i> Cytron MD10‑POT (left/right)</div></div>
+        <div class="info-card"><div class="label">Obstacle Sensors</div><div class="value"><i class="fas fa-radar"></i> 4× Pepperl+Fuchs ML100</div></div>
+        <div class="info-card"><div class="label">IMU</div><div class="value"><i class="fas fa-compass"></i> MPU‑6050 (I²C)</div></div>
+        <div class="info-card"><div class="label">Relay Board</div><div class="value"><i class="fas fa-toggle-on"></i> 4‑channel (active LOW)</div></div>
+      </div>
+
+      <!-- 4. Pin Configuration -->
+      <div class="subheading">
+        <i class="fas fa-plug"></i> 4. Hardware Interface & Pin Configuration
+      </div>
+      <table class="data-table">
+        <thead>
+          <tr><th>Function</th><th>Arduino Pin</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Left PWM</td><td><span class="val-badge">D2</span></td><td>PWM speed control for left motor pair</td></tr>
+          <tr><td>Left Direction</td><td><span class="val-badge">D22</span></td><td>Direction control for left motor pair</td></tr>
+          <tr><td>Right PWM</td><td><span class="val-badge">D3</span></td><td>PWM speed control for right motor pair</td></tr>
+          <tr><td>Right Direction</td><td><span class="val-badge">D23</span></td><td>Direction control for right motor pair</td></tr>
+          <tr><td>ML100 Front</td><td><span class="val-badge">D24</span></td><td>Front obstacle detection (active LOW)</td></tr>
+          <tr><td>ML100 Back</td><td><span class="val-badge">D25</span></td><td>Rear obstacle detection (active LOW)</td></tr>
+          <tr><td>ML100 Left</td><td><span class="val-badge">D26</span></td><td>Left‑side obstacle detection (active LOW)</td></tr>
+          <tr><td>ML100 Right</td><td><span class="val-badge">D27</span></td><td>Right‑side obstacle detection (active LOW)</td></tr>
+          <tr><td>Relay CH1 (Main)</td><td><span class="val-badge">D30</span></td><td>24 V drive bus contactor (active LOW)</td></tr>
+          <tr><td>Relay CH2 (Reverse)</td><td><span class="val-badge">D31</span></td><td>Reverse warning beeper (active LOW)</td></tr>
+          <tr><td>Relay CH3 (Horn)</td><td><span class="val-badge">D32</span></td><td>Obstacle/hazard horn (active LOW)</td></tr>
+          <tr><td>Relay CH4 (Spare)</td><td><span class="val-badge">D33</span></td><td>Spare auxiliary output</td></tr>
+        </tbody>
+      </table>
+
+      <!-- 5. Vision Tracking Parameters -->
+      <div class="subheading">
+        <i class="fas fa-crosshairs"></i> 5. Vision Tracking Parameters
+      </div>
+      <table class="data-table">
+        <thead>
+          <tr><th>Parameter</th><th>Value</th><th>Purpose</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>CENTER_MIN</td><td><span class="val-badge">110</span></td><td>Left boundary of center region</td></tr>
+          <tr><td>CENTER_MAX</td><td><span class="val-badge">210</span></td><td>Right boundary of center region</td></tr>
+          <tr><td>DIST_TOO_CLOSE</td><td><span class="val-badge">140 px</span></td><td>Bounding‑box width above which robot stops</td></tr>
+          <tr><td>DIST_TOO_FAR</td><td><span class="val-badge">70 px</span></td><td>Bounding‑box width below which robot pursues</td></tr>
+        </tbody>
+      </table>
+
+      <!-- 6. Motor Speed Parameters -->
+      <div class="subheading">
+        <i class="fas fa-tachometer-alt"></i> 6. Motor Speed Parameters
+      </div>
+      <table class="data-table">
+        <thead>
+          <tr><th>Parameter</th><th>Value</th><th>Purpose</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>CRUISE_PWM</td><td><span class="val-badge">160</span></td><td>Normal forward tracking</td></tr>
+          <tr><td>TURN_PWM</td><td><span class="val-badge">110</span></td><td>Differential turning / pivot</td></tr>
+          <tr><td>EVADE_PWM</td><td><span class="val-badge">130</span></td><td>Obstacle avoidance</td></tr>
+          <tr><td>RAMP_STEP</td><td><span class="val-badge">8</span></td><td>Maximum speed change per control cycle</td></tr>
+          <tr><td>GYRO_DRIFT_KP</td><td><span class="val-badge">18.0</span></td><td>Yaw correction gain</td></tr>
+          <tr><td>EVADE_STEP_MS</td><td><span class="val-badge">450 ms</span></td><td>Avoidance pulse duration</td></tr>
+          <tr><td>LOSS_TIMEOUT_MS</td><td><span class="val-badge">1500 ms</span></td><td>Enter search mode after target loss</td></tr>
+          <tr><td>TARGET_RECOVERY_TIMEOUT</td><td><span class="val-badge">4000 ms</span></td><td>Emergency stop after failed search</td></tr>
+        </tbody>
+      </table>
+
+      <!-- 7. FSM States -->
+      <div class="subheading">
+        <i
