@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neev Saraiya · WRO</title>
+  <!-- Google Font (Inter) for clean modern look -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 (free icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(145deg, #f9faff 0%, #eef2f9 100%);
+      font-family: 'Inter', sans-serif;
+      color: #1a2b3d;
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 1.5rem;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 2.5rem;
+      padding: 2.5rem 2.8rem;
+      max-width: 1000px;
+      width: 100%;
+      box-shadow: 0 30px 50px -20px rgba(0, 20, 40, 0.25),
+                  0 0 0 1px rgba(255, 255, 255, 0.7) inset;
+      transition: all 0.2s ease;
+      border: 1px solid rgba(255, 255, 255, 0.6);
+    }
+
+    /* header area */
+    .header-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.8rem;
+    }
+
+    .name-badge {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .avatar {
+      background: linear-gradient(135deg, #1a2b3d, #2e4b6e);
+      width: 4rem;
+      height: 4rem;
+      border-radius: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 2rem;
+      font-weight: 600;
+      box-shadow: 0 12px 18px -8px rgba(0, 20, 40, 0.3);
+      border: 2px solid rgba(255, 255, 255, 0.5);
+    }
+
+    h1 {
+      font-size: 2.4rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      color: #0d1c2b;
+    }
+
+    .search-hint {
+      background: #ffffffcc;
+      backdrop-filter: blur(4px);
+      border-radius: 40px;
+      padding: 0.55rem 1.3rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      border: 1px solid #cbd6e4;
+      color: #1d3b5c;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+    }
+
+    .search-hint i {
+      color: #3b6ea5;
+      font-size: 1rem;
+    }
+
+    .verified-tag {
+      background: #e6f0ff;
+      border-radius: 40px;
+      padding: 0.35rem 1.1rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #1e4d7a;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      border: 1px solid #b9d1f0;
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+    }
+
+    .verified-tag i {
+      font-size: 0.75rem;
+      color: #2d7a46;
+    }
+
+    .divider {
+      height: 2px;
+      background: linear-gradient(90deg, #b6cbe0, #dbe6f2, #b6cbe0);
+      border-radius: 10px;
+      margin: 1.5rem 0 1.8rem 0;
+      opacity: 0.6;
+    }
+
+    /* tagline / quick intro */
+    .tagline {
+      font-size: 1.35rem;
+      font-weight: 400;
+      color: #264e73;
+      margin-bottom: 1.8rem;
+      background: #e9f0fa;
+      padding: 0.9rem 1.6rem;
+      border-radius: 3rem;
+      display: inline-block;
+      border: 1px solid #bdd1e9;
+      box-shadow: 0 4px 10px -4px rgba(0,0,0,0.05);
+    }
+
+    .tagline i {
+      margin-right: 0.6rem;
+      color: #1a4b7a;
+    }
+
+    /* reminder box — double check */
+    .reminder-box {
+      background: #ffffffd9;
+      border-left: 6px solid #1a4b7a;
+      border-radius: 1.6rem;
+      padding: 1.5rem 2rem;
+      margin: 1.8rem 0 2rem 0;
+      box-shadow: 0 10px 20px -12px rgba(0, 30, 60, 0.2);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.2rem;
+    }
+
+    .reminder-text {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-weight: 500;
+      color: #0b2a44;
+      font-size: 1.1rem;
+    }
+
+    .reminder-text i {
+      font-size: 1.8rem;
+      color: #1a4b7a;
+    }
+
+    .check-button {
+      background: #1a2b3d;
+      color: white;
+      border: none;
+      padding: 0.9rem 2rem;
+      border-radius: 3rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s, box-shadow 0.2s;
+      box-shadow: 0 10px 18px -8px rgba(20, 40, 70, 0.4);
+      border: 1px solid #3f5e7e;
+      letter-spacing: 0.01em;
+    }
+
+    .check-button i {
+      font-size: 1rem;
+    }
+
+    .check-button:hover {
+      background: #263e57;
+      box-shadow: 0 14px 22px -8px #0a1e30;
+    }
+
+    .check-button:active {
+      transform: scale(0.97);
+    }
+
+    /* dynamic confirmation message */
+    .confirmation-message {
+      margin-top: 1rem;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: #1b5e3f;
+      background: #e2f3e9;
+      padding: 0.8rem 1.6rem;
+      border-radius: 3rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      border: 1px solid #a8d5b5;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.25s, transform 0.25s;
+      pointer-events: none;
+    }
+
+    .confirmation-message.show {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .confirmation-message i {
+      color: #1b7a3f;
+    }
+
+    /* ===== RAGHAV HUB FORMAT STYLES ===== */
+    .hub-section {
+      margin-top: 2.2rem;
+      border-top: 2px solid #d9e5f2;
+      padding-top: 2rem;
+    }
+
+    .hub-heading {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #0d2d4b;
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      margin-bottom: 1.2rem;
+      letter-spacing: -0.01em;
+    }
+
+    .hub-heading i {
+      color: #1a4b7a;
+      font-size: 1.5rem;
+      width: 1.8rem;
+    }
+
+    .hub-subhead {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #1e3a5a;
+      margin: 1.8rem 0 0.8rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .hub-subhead i {
+      color: #2b5d8a;
+    }
+
+    .hub-card-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      margin: 1rem 0 0.5rem 0;
+    }
+
+    .hub-card {
+      background: #f6faff;
+      border-radius: 1.2rem;
+      padding: 1.1rem 1.4rem;
+      border: 1px solid #d0e0f0;
+      flex: 1 1 260px;
+      box-shadow: 0 4px 8px -4px rgba(0, 30, 60, 0.08);
+      transition: background 0.15s;
+    }
+
+    .hub-card:hover {
+      background: #f0f7ff;
+    }
+
+    .hub-card .card-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-weight: 600;
+      color: #4f7092;
+      margin-bottom: 0.3rem;
+    }
+
+    .hub-card .card-value {
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: #0b2a44;
+    }
+
+    .hub-card .card-value i {
+      color: #1a4b7a;
+      margin-right: 0.4rem;
+      width: 1.2rem;
+      font-size: 0.95rem;
+    }
+
+    /* team / partner highlight */
+    .partner-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1.5rem;
+      background: #edf4fc;
+      padding: 1.2rem 1.8rem;
+      border-radius: 1.8rem;
+      margin: 1.2rem 0 1rem 0;
+      border: 1px solid #c2d6ec;
+    }
+
+    .partner-info {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex: 1 1 220px;
+    }
+
+    .partner-avatar {
+      background: #1e3e60;
+      color: white;
+      width: 3.2rem;
+      height: 3.2rem;
+      border-radius: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.3rem;
+    }
+
+    .partner-text h4 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #0b2a44;
+    }
+
+    .partner-text p {
+      font-size: 0.9rem;
+      color: #32567a;
+    }
+
+    .hub-link {
+      background: #1a2b3d;
+      color: white;
+      border-radius: 3rem;
+      padding: 0.7rem 1.6rem;
+      font-weight: 500;
+      font-size: 0.9rem;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      transition: background 0.15s, box-shadow 0.2s;
+      border: 1px solid #45688b;
+      box-shadow: 0 6px 14px -6px #0e1e2e;
+      white-space: nowrap;
+    }
+
+    .hub-link i {
+      font-size: 0.9rem;
+    }
+
+    .hub-link:hover {
+      background: #28445e;
+      box-shadow: 0 8px 16px -6px #091826;
+    }
+
+    /* table for state machine */
+    .state-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.2rem 0 0.8rem 0;
+      font-size: 0.92rem;
+      border-radius: 1.2rem;
+      overflow: hidden;
+      box-shadow: 0 4px 12px -6px rgba(0, 20, 40, 0.12);
+    }
+
+    .state-table th {
+      background: #1e3a5a;
+      color: white;
+      font-weight: 600;
+      text-align: left;
+      padding: 0.9rem 1.2rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .state-table td {
+      padding: 0.85rem 1.2rem;
+      border-bottom: 1px solid #d8e5f2;
+      background: #ffffff;
+      color: #0d2d4b;
+      vertical-align: top;
+    }
+
+    .state-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .state-table tr:hover td {
+      background: #f4faff;
+    }
+
+    .state-table td:first-child {
+      font-weight: 600;
+      color: #1a3e62;
+      white-space: nowrap;
+    }
+
+    .state-table .val-badge {
+      background: #e9f2fc;
+      border-radius: 30px;
+      padding: 0.2rem 1rem;
+      font-weight: 500;
+      display: inline-block;
+      font-size: 0.85rem;
+      border: 1px solid #bed6ee;
+    }
+
+    /* milestone list */
+    .milestone-list {
+      list-style: none;
+      margin: 1rem 0 0 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+
+    .milestone-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      background: #f6faff;
+      padding: 1rem 1.4rem;
+      border-radius: 1.4rem;
+      border: 1px solid #d0e0f0;
+      font-weight: 450;
+      color: #183b5c;
+    }
+
+    .milestone-list li i {
+      color: #1a4b7a;
+      font-size: 1.2rem;
+      width: 1.6rem;
+      margin-top: 0.15rem;
+    }
+
+    .milestone-list li strong {
+      font-weight: 700;
+      color: #0b2a44;
+    }
+
+    .badge-score {
+      background: #1e3a5a;
+      color: white;
+      border-radius: 40px;
+      padding: 0.15rem 0.9rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-left: 0.5rem;
+      display: inline-block;
+      letter-spacing: 0.02em;
+    }
+
+    /* meta grid (kept from original) */
+    .meta-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem 2rem;
+      justify-content: flex-start;
+      margin-top: 2rem;
+      color: #2d4a6b;
+      font-weight: 400;
+      font-size: 0.95rem;
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      background: #f2f7ff;
+      padding: 0.45rem 1.2rem;
+      border-radius: 30px;
+      border: 1px solid #cfdef0;
+    }
+
+    .meta-item i {
+      color: #1a4b7a;
+      width: 1.1rem;
+      font-size: 0.95rem;
+    }
+
+    /* footer note */
+    .footer-note {
+      margin-top: 2.2rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #6988a8;
+      border-top: 1px solid #cdddec;
+      padding-top: 1.5rem;
+      letter-spacing: 0.01em;
+    }
+
+    /* responsiveness */
+    @media (max-width: 700px) {
+      .card {
+        padding: 1.8rem 1.5rem;
+        border-radius: 2rem;
+      }
+      h1 {
+        font-size: 1.9rem;
+      }
+      .header-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+      .name-badge {
+        width: 100%;
+      }
+      .avatar {
+        width: 3.2rem;
+        height: 3.2rem;
+        font-size: 1.6rem;
+      }
+      .reminder-box {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1.3rem 1.5rem;
+      }
+      .check-button {
+        width: 100%;
+        justify-content: center;
+      }
+      .tagline {
+        font-size: 1.1rem;
+        padding: 0.7rem 1.2rem;
+      }
+      .partner-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .state-table th,
+      .state-table td {
+        padding: 0.7rem 0.8rem;
+        font-size: 0.8rem;
+      }
+      .state-table td:first-child {
+        white-space: normal;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .card {
+        padding: 1.4rem 1rem;
+      }
+      h1 {
+        font-size: 1.6rem;
+      }
+      .hub-heading {
+        font-size: 1.1rem;
+      }
+      .milestone-list li {
+        padding: 0.8rem 1rem;
+        font-size: 0.9rem;
+      }
+      .state-table th,
+      .state-table td {
+        font-size: 0.75rem;
+        padding: 0.6rem 0.6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <!-- header with name and search reminder -->
+    <div class="header-row">
+      <div class="name-badge">
+        <div class="avatar">NS</div>
+        <h1>Neev Saraiya</h1>
+      </div>
+      <div class="search-hint">
+        <i class="fas fa-search"></i>
+        <span>search: <strong>“Neev Saraiya WRO”</strong></span>
+      </div>
+    </div>
+
+    <!-- tagline -->
+    <div class="tagline">
+      <i class="fas fa-robot"></i> FSM State Isolation, System Hardware Logic &amp; Motor Ramping Maps
+    </div>
+
+    <!-- ⭐ DOUBLE CHECK / REMINDER BOX -->
+    <div class="reminder-box">
+      <div class="reminder-text">
+        <i class="fas fa-circle-check"></i>
+        <span>Double‑check: did you find me?</span>
+      </div>
+      <button class="check-button" id="checkBtn">
+        <i class="fas fa-check-circle"></i> Yes, it's you
+      </button>
+    </div>
+
+    <!-- inline confirmation -->
+    <div class="confirmation-message" id="confirmationMsg">
+      <i class="fas fa-check-circle"></i> Confirmed — you're on the right page, Neev!
+    </div>
+
+    <!-- ===== RAGHAV HUB FORMAT CONTENT ===== -->
+    <div class="hub-section">
+
+      <!-- Contact / partner row -->
+      <div class="hub-heading">
+        <i class="fas fa-envelope"></i> 📧 Contact Infrastructure
+      </div>
+
+      <div class="partner-row">
+        <div class="partner-info">
+          <div class="partner-avatar">RJ</div>
+          <div class="partner-text">
+            <h4>Raghav Joshi</h4>
+            <p>Co-Developer, Mechanical Configuration &amp; Core Strategy Planner</p>
+          </div>
+        </div>
+        <a href="#" class="hub-link" onclick="alert('RaghavHub.com — external link placeholder'); return false;">
+          <i class="fas fa-globe"></i> Launch RaghavHub.com
+        </a>
+      </div>
+
+      <!-- Computer Vision Engine -->
+      <div class="hub-subhead">
+        <i class="fas fa-eye"></i> 🤖 The "FollowMe" Computer Vision Engine
+      </div>
+      <p style="color: #254b6e; margin-bottom: 0.8rem; font-size: 0.98rem;">
+        Upgrading past basic ultrasonic range loops, the tracking core structures its navigation commands using real‑time machine vision tracking:
+      </p>
+      <ul class="milestone-list" style="margin-top: 0.2rem;">
+        <li><i class="fas fa-microchip"></i> <span><strong>AprilTag Matrix Identification:</strong> Replaced proximity echo distance metrics with a HuskyLens AI lens node executing tag lock configurations to pinpoint the guide tag.</span></li>
+        <li><i class="fas fa-exchange-alt"></i> <span><strong>High-Speed Packets:</strong> Intercepts digital feedback over Serial1 hardware UART configurations (9600 baud) to isolate current target tracking properties (xCenter and width parameters).</span></li>
+        <li><i class="fas fa-arrows-alt"></i> <span><strong>Directional Alignment Mapping:</strong> Translates frame variations into differential motor power curves, ensuring smooth chassis tracking behind the guide tag.</span></li>
+      </ul>
+
+      <!-- Milestones -->
+      <div class="hub-subhead">
+        <i class="fas fa-trophy"></i> 🏆 Verified Tournament Milestones
+      </div>
+      <p style="color: #254b6e; margin-bottom: 0.8rem; font-size: 0.98rem;">
+        Representing Navrachana International School (NISV), our elementary power trio engineered an elite autonomous robotics system under the global competition theme <strong>"Robots Meet Culture"</strong>:
+      </p>
+      <ul class="milestone-list">
+        <li><i class="fas fa-medal"></i> <span><strong>Regional Selection:</strong> Secured 2nd Place in the Future Innovators category to unlock a national stage pathway.</span></li>
+        <li><i class="fas fa-award"></i> <span><strong>National Grand Podium:</strong> Placed 3rd in India amidst over 300 competitive operations at the National Finals, reaching an engineering milestone score of <span class="badge-score">163 Points</span> under Team Number 1167!</span></li>
+        <li><i class="fas fa-plane"></i> <span><strong>International Arena:</strong> Nominated to fly the national colors at the upcoming international WRO Asia Pacific Open Championship!</span></li>
+      </ul>
+
+      <!-- System Parameters & State Machine -->
+      <div class="hub-subhead">
+        <i class="fas fa-cogs"></i> ⚙️ System Parameters &amp; State Machine Thresholds
+      </div>
+      <p style="color: #254b6e; margin-bottom: 0.8rem; font-size: 0.98rem;">
+        The entire automation code runs at an intentional ~40Hz execution frequency framework (25ms loop delays) governed by six distinct finite state transitions:
+      </p>
+
+      <table class="state-table">
+        <thead>
+          <tr>
+            <th>Parameter / Register</th>
+            <th>Target Value</th>
+            <th>Hardware Operation / Application Scope</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>CENTER_MIN / CENTER_MAX</td>
+            <td><span class="val-badge">110 / 210 Pixels</span></td>
+            <td>Defines standard boundaries for a centered target on a 320×240 pixel screen coordinate grid.</td>
+          </tr>
+          <tr>
+            <td>DIST_TOO_CLOSE</td>
+            <td><span class="val-badge">140 Pixels Width</span></td>
+            <td>Tag width threshold that halts the chassis to prevent hitting the person in front.</td>
+          </tr>
+          <tr>
+            <td>DIST_TOO_FAR</td>
+            <td><span class="val-badge">70 Pixels Width</span></td>
+            <td>Tag width threshold that triggers active pursuit speed loops.</td>
+          </tr>
+          <tr>
+            <td>CRUISE_PWM / TURN_PWM</td>
+            <td><span class="val-badge">160 / 110 (0‑255 Scale)</span></td>
+            <td>Establishes base power limits for straight forward tracking and differential pivoting.</td>
+          </tr>
+          <tr>
+            <td>EVADE_PWM / RAMP_STEP</td>
+            <td><span class="val-badge">130 / 8 Units per Cycle</span></td>
+            <td>Limits speed during active avoidance states and governs safe motor speed ramping profiles.</td>
+          </tr>
+          <tr>
+            <td>LOSS_TIMEOUT_MS</td>
+            <td><span class="val-badge">1500 Milliseconds</span></td>
+            <td>Maximum allowed duration for camera dropouts before executing recovery search states.</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div> <!-- end hub-section -->
+
+    <!-- meta grid -->
+    <div class="meta-grid">
+      <div class="meta-item">
+        <i class="fas fa-user"></i> Neev Saraiya
+      </div>
+      <div class="meta-item">
+        <i class="fas fa-globe"></i> search: "Neev Saraiya WRO"
+      </div>
+      <div class="meta-item">
+        <i class="fas fa-shield-alt"></i> verified identity
+      </div>
+    </div>
+
+    <!-- footer -->
+    <div class="footer-note">
+      <i class="fas fa-code"></i> personal website · double‑checked with Neev
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      const checkBtn = document.getElementById('checkBtn');
+      const confirmationMsg = document.getElementById('confirmationMsg');
+
+      function showConfirmation() {
+        confirmationMsg.classList.add('show');
+        const originalButtonHTML = checkBtn.innerHTML;
+        checkBtn.innerHTML = '<i class="fas fa-check"></i> confirmed';
+        checkBtn.style.background = '#2a5c3e';
+        checkBtn.style.borderColor = '#4b8b62';
+        checkBtn.disabled = true;
+        checkBtn.style.opacity = '0.9';
+        checkBtn.style.cursor = 'default';
+
+        setTimeout(() => {
+          confirmationMsg.classList.remove('show');
+          checkBtn.innerHTML = originalButtonHTML;
+          checkBtn.style.background = '#1a2b3d';
+          checkBtn.style.borderColor = '#3f5e7e';
+          checkBtn.disabled = false;
+          checkBtn.style.opacity = '1';
+          checkBtn.style.cursor = 'pointer';
+        }, 2500);
+      }
+
+      checkBtn.addEventListener('click', showConfirmation);
+      console.log('✅ Neev Saraiya site loaded. Double-check button ready.');
+    })();
+  </script>
+</body>
+</html>
