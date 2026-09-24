@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neev Saraiya · personal site</title>
+  <!-- Google Font (Inter) for clean modern look -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 (free icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(145deg, #f9faff 0%, #eef2f9 100%);
+      font-family: 'Inter', sans-serif;
+      color: #1a2b3d;
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 1.5rem;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 2.5rem;
+      padding: 2.5rem 2.8rem;
+      max-width: 820px;
+      width: 100%;
+      box-shadow: 0 30px 50px -20px rgba(0, 20, 40, 0.25),
+                  0 0 0 1px rgba(255, 255, 255, 0.7) inset;
+      transition: all 0.2s ease;
+      border: 1px solid rgba(255, 255, 255, 0.6);
+    }
+
+    /* header area */
+    .header-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.8rem;
+    }
+
+    .name-badge {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .avatar {
+      background: linear-gradient(135deg, #1a2b3d, #2e4b6e);
+      width: 4rem;
+      height: 4rem;
+      border-radius: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 2rem;
+      font-weight: 600;
+      box-shadow: 0 12px 18px -8px rgba(0, 20, 40, 0.3);
+      border: 2px solid rgba(255, 255, 255, 0.5);
+    }
+
+    h1 {
+      font-size: 2.4rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      color: #0d1c2b;
+    }
+
+    .search-hint {
+      background: #ffffffcc;
+      backdrop-filter: blur(4px);
+      border-radius: 40px;
+      padding: 0.55rem 1.3rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      border: 1px solid #cbd6e4;
+      color: #1d3b5c;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+    }
+
+    .search-hint i {
+      color: #3b6ea5;
+      font-size: 1rem;
+    }
+
+    .verified-tag {
+      background: #e6f0ff;
+      border-radius: 40px;
+      padding: 0.35rem 1.1rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #1e4d7a;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      border: 1px solid #b9d1f0;
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+    }
+
+    .verified-tag i {
+      font-size: 0.75rem;
+      color: #2d7a46;
+    }
+
+    .divider {
+      height: 2px;
+      background: linear-gradient(90deg, #b6cbe0, #dbe6f2, #b6cbe0);
+      border-radius: 10px;
+      margin: 1.5rem 0 1.8rem 0;
+      opacity: 0.6;
+    }
+
+    /* intro / tagline */
+    .tagline {
+      font-size: 1.35rem;
+      font-weight: 400;
+      color: #264e73;
+      margin-bottom: 2rem;
+      background: #e9f0fa;
+      padding: 0.9rem 1.6rem;
+      border-radius: 3rem;
+      display: inline-block;
+      border: 1px solid #bdd1e9;
+      box-shadow: 0 4px 10px -4px rgba(0,0,0,0.05);
+    }
+
+    .tagline i {
+      margin-right: 0.6rem;
+      color: #1a4b7a;
+    }
+
+    /* reminder section (double check) */
+    .reminder-box {
+      background: #ffffffd9;
+      border-left: 6px solid #1a4b7a;
+      border-radius: 1.6rem;
+      padding: 1.5rem 2rem;
+      margin: 1.8rem 0 2rem 0;
+      box-shadow: 0 10px 20px -12px rgba(0, 30, 60, 0.2);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.2rem;
+    }
+
+    .reminder-text {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-weight: 500;
+      color: #0b2a44;
+      font-size: 1.1rem;
+    }
+
+    .reminder-text i {
+      font-size: 1.8rem;
+      color: #1a4b7a;
+    }
+
+    .check-button {
+      background: #1a2b3d;
+      color: white;
+      border: none;
+      padding: 0.9rem 2rem;
+      border-radius: 3rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s, box-shadow 0.2s;
+      box-shadow: 0 10px 18px -8px rgba(20, 40, 70, 0.4);
+      border: 1px solid #3f5e7e;
+      letter-spacing: 0.01em;
+    }
+
+    .check-button i {
+      font-size: 1rem;
+    }
+
+    .check-button:hover {
+      background: #263e57;
+      box-shadow: 0 14px 22px -8px #0a1e30;
+    }
+
+    .check-button:active {
+      transform: scale(0.97);
+    }
+
+    /* dynamic confirmation message */
+    .confirmation-message {
+      margin-top: 1rem;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: #1b5e3f;
+      background: #e2f3e9;
+      padding: 0.8rem 1.6rem;
+      border-radius: 3rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      border: 1px solid #a8d5b5;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.25s, transform 0.25s;
+      pointer-events: none;
+    }
+
+    .confirmation-message.show {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .confirmation-message i {
+      color: #1b7a3f;
+    }
+
+    /* details / meta info */
+    .meta-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem 2rem;
+      justify-content: flex-start;
+      margin-top: 2rem;
+      color: #2d4a6b;
+      font-weight: 400;
+      font-size: 0.95rem;
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      background: #f2f7ff;
+      padding: 0.45rem 1.2rem;
+      border-radius: 30px;
+      border: 1px solid #cfdef0;
+    }
+
+    .meta-item i {
+      color: #1a4b7a;
+      width: 1.1rem;
+      font-size: 0.95rem;
+    }
+
+    /* footer note */
+    .footer-note {
+      margin-top: 2.2rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #6988a8;
+      border-top: 1px solid #cdddec;
+      padding-top: 1.5rem;
+      letter-spacing: 0.01em;
+    }
+
+    /* responsiveness */
+    @media (max-width: 600px) {
+      .card {
+        padding: 1.8rem 1.5rem;
+        border-radius: 2rem;
+      }
+      h1 {
+        font-size: 1.9rem;
+      }
+      .header-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+      .name-badge {
+        width: 100%;
+      }
+      .avatar {
+        width: 3.2rem;
+        height: 3.2rem;
+        font-size: 1.6rem;
+      }
+      .reminder-box {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1.3rem 1.5rem;
+      }
+      .check-button {
+        width: 100%;
+        justify-content: center;
+      }
+      .tagline {
+        font-size: 1.1rem;
+        padding: 0.7rem 1.2rem;
+      }
+      .meta-grid {
+        gap: 0.8rem;
+      }
+    }
+
+    /* just for a tiny dot separator */
+    .dot-sep {
+      width: 4px;
+      height: 4px;
+      background: #7f9bb9;
+      border-radius: 50%;
+      display: inline-block;
+      margin: 0 0.2rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <!-- header with name and search reminder -->
+    <div class="header-row">
+      <div class="name-badge">
+        <div class="avatar">NS</div>
+        <h1>Neev Saraiya</h1>
+      </div>
+      <div class="search-hint">
+        <i class="fas fa-search"></i>
+        <span>search: <strong>“Neev Saraiya WRO”</strong></span>
+      </div>
+    </div>
+
+    <!-- tagline / quick intro -->
+    <div class="tagline">
+      <i class="fas fa-terminal"></i>  building, learning & shipping ideas
+    </div>
+
+    <!-- ⭐ DOUBLE CHECK / REMINDER BOX – main interactive element -->
+    <div class="reminder-box">
+      <div class="reminder-text">
+        <i class="fas fa-circle-check"></i>
+        <span>Double‑check: did you find me?</span>
+      </div>
+      <button class="check-button" id="checkBtn">
+        <i class="fas fa-check-circle"></i> Yes, it's you
+      </button>
+    </div>
+
+    <!-- inline confirmation that appears after click -->
+    <div class="confirmation-message" id="confirmationMsg">
+      <i class="fas fa-check-circle"></i> Confirmed — you're on the right page, Neev!
+    </div>
+
+    <!-- additional meta details for authenticity -->
+    <div class="meta-grid">
+      <div class="meta-item">
+        <i class="fas fa-user"></i> Neev Saraiya
+      </div>
+      <div class="meta-item">
+        <i class="fas fa-globe"></i> search: "Neev Saraiya WRO"
+      </div>
+      <div class="meta-item">
+        <i class="fas fa-shield-alt"></i> verified identity
+      </div>
+    </div>
+
+    <!-- subtle footer / site note -->
+    <div class="footer-note">
+      <i class="fas fa-code"></i> personal website · double‑checked with Neev
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      const checkBtn = document.getElementById('checkBtn');
+      const confirmationMsg = document.getElementById('confirmationMsg');
+
+      // function to show confirmation (and hide after a while)
+      function showConfirmation() {
+        // show the message
+        confirmationMsg.classList.add('show');
+
+        // optional: change button text temporarily
+        const originalButtonHTML = checkBtn.innerHTML;
+        checkBtn.innerHTML = '<i class="fas fa-check"></i> confirmed';
+        checkBtn.style.background = '#2a5c3e';
+        checkBtn.style.borderColor = '#4b8b62';
+
+        // disable button for a moment to prevent spam (but re-enable after 2s)
+        checkBtn.disabled = true;
+        checkBtn.style.opacity = '0.9';
+        checkBtn.style.cursor = 'default';
+
+        // reset after 2.5 seconds
+        setTimeout(() => {
+          confirmationMsg.classList.remove('show');
+          checkBtn.innerHTML = originalButtonHTML;
+          checkBtn.style.background = '#1a2b3d';
+          checkBtn.style.borderColor = '#3f5e7e';
+          checkBtn.disabled = false;
+          checkBtn.style.opacity = '1';
+          checkBtn.style.cursor = 'pointer';
+        }, 2500);
+      }
+
+      // attach click event to the button
+      checkBtn.addEventListener('click', showConfirmation);
+
+      // also allow clicking anywhere on the reminder box? maybe not, only button is fine.
+      // but we can also add a small double-check hint: clicking on the reminder text also works? 
+      // we'll keep it simple — only button.
+
+      // extra: if someone clicks the "search hint" box, we could animate, but not necessary.
+      // But we want the page to respond to "double check with me once" — this button does exactly that.
+
+      // Optional: console log to know it's active
+      console.log('✅ Neev Saraiya site loaded. Double-check button ready.');
+    })();
+  </script>
+</body>
+</html>
