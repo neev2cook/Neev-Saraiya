@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neev Saraiya · Who am I?</title>
+  <!-- Google Font for a clean look -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #faf9f8;
+      color: #1e1e1e;
+      line-height: 1.6;
+      padding: 2rem 1rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .card {
+      max-width: 750px;
+      width: 100%;
+      background: white;
+      border-radius: 2rem;
+      padding: 3rem 2.5rem;
+      box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.08), 0 4px 18px rgba(0, 0, 0, 0.02);
+      transition: all 0.2s ease;
+    }
+
+    /* subtle accent line */
+    .accent {
+      width: 70px;
+      height: 5px;
+      background: #2b6e5c;
+      border-radius: 4px;
+      margin-bottom: 1.8rem;
+    }
+
+    .name {
+      font-size: 2.8rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 0.25rem;
+      color: #111;
+    }
+
+    .name span {
+      color: #2b6e5c;
+    }
+
+    .tagline {
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: #4a4a4a;
+      margin-bottom: 2rem;
+      border-left: 4px solid #2b6e5c;
+      padding-left: 1.2rem;
+    }
+
+    .bio {
+      font-size: 1.1rem;
+      color: #2c2c2c;
+      margin-bottom: 2.2rem;
+    }
+
+    .bio p {
+      margin-bottom: 1.2rem;
+    }
+
+    .interests {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1rem;
+      margin: 2rem 0 2.2rem;
+      padding: 0;
+      list-style: none;
+    }
+
+    .interests li {
+      background: #f0f3f1;
+      color: #1e3b32;
+      padding: 0.5rem 1.2rem;
+      border-radius: 40px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      transition: background 0.15s;
+    }
+
+    .interests li:hover {
+      background: #e0e9e4;
+    }
+
+    .connect {
+      margin-top: 2.5rem;
+      padding-top: 1.8rem;
+      border-top: 1px solid #e0e0e0;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .connect-label {
+      font-size: 1rem;
+      font-weight: 500;
+      color: #3a3a3a;
+      letter-spacing: 0.02em;
+    }
+
+    .search-hint {
+      background: #f5f7f6;
+      padding: 0.6rem 1.2rem;
+      border-radius: 60px;
+      font-size: 0.9rem;
+      color: #2b6e5c;
+      font-weight: 500;
+      border: 1px dashed #b8cfc6;
+      white-space: nowrap;
+    }
+
+    .search-hint i {
+      font-style: normal;
+      font-weight: 600;
+      background: #2b6e5c;
+      color: white;
+      padding: 0.15rem 0.6rem;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      margin-right: 0.4rem;
+    }
+
+    /* small responsive */
+    @media (max-width: 500px) {
+      .card {
+        padding: 2rem 1.5rem;
+        border-radius: 1.5rem;
+      }
+
+      .name {
+        font-size: 2.2rem;
+      }
+
+      .tagline {
+        font-size: 1rem;
+      }
+
+      .bio {
+        font-size: 1rem;
+      }
+
+      .connect {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .search-hint {
+        white-space: normal;
+      }
+    }
+
+    /* keep it clean, no project details visible */
+    .note {
+      font-size: 0.85rem;
+      color: #888;
+      margin-top: 2rem;
+      text-align: center;
+      letter-spacing: 0.02em;
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <div class="accent"></div>
+
+    <!-- Your name — the main focus -->
+    <h1 class="name">Neev <span>Saraiya</span></h1>
+
+    <!-- Short, personal tagline instead of project jargon -->
+    <div class="tagline">
+      Robotics · embedded systems · building things that move &amp; sense
+    </div>
+
+    <!-- Human bio: just enough to know who you are -->
+    <div class="bio">
+      <p>
+        I'm Neev — a maker and problem‑solver who loves working at the intersection 
+        of hardware and code. I spend my time designing autonomous robots, 
+        tinkering with sensors, and turning ideas into working prototypes.
+      </p>
+      <p>
+        When I'm not soldering or debugging firmware, you'll find me exploring 
+        new tools, sketching mechanisms, or sharing what I learn with others.
+      </p>
+    </div>
+
+    <!-- Interests as soft pills, no project report details -->
+    <ul class="interests">
+      <li>🤖 autonomous systems</li>
+      <li>⚙️ embedded control</li>
+      <li>👁️ computer vision</li>
+      <li>🔌 electronics</li>
+      <li>🧠 finite state machines</li>
+      <li>🛠️ rapid prototyping</li>
+    </ul>
+
+    <!-- Connect section — keeps the “Neev Saraiya WRO” search hint but without heavy tech -->
+    <div class="connect">
+      <span class="connect-label">Let's connect</span>
+      <div class="search-hint">
+        <i>search</i> “Neev Saraiya WRO”
+      </div>
+    </div>
+
+    <!-- tiny subtle note, nothing about the report -->
+    <div class="note">
+      always building · always learning
+    </div>
+  </main>
+</body>
+</html>
